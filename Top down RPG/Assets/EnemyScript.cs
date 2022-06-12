@@ -5,11 +5,17 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     public float health = 10;
+    Animator animate;
+
+    private void Start()
+    {
+        animate = GetComponent<Animator>();
+    }
 
     public void setHealth(float value) {
         health -= value;
             if (health <= 0) {
-                defeated();
+            defeated();
             }
             print(getHealth());
     }
@@ -18,7 +24,12 @@ public class EnemyScript : MonoBehaviour
         return this.health;
     }
 
-    public void defeated() {
+    public void removeEnemy() {
         Destroy(gameObject);
+    }
+
+    public void defeated()
+    {
+        animate.SetTrigger("Defeated");
     }
 }
